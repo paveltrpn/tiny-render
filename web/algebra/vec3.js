@@ -1,5 +1,5 @@
 
-class vec3 {
+export class vec3 {
     /**
      * 
      * @param {number} x 
@@ -27,7 +27,7 @@ class vec3 {
  * @param {vec3} b 
  * @returns {vec3}
  */
-function vec3Sum(a, b) {
+export function vec3Sum(a, b) {
     let rt = new vec3()
 
     rt.data[0] = a.data[0] + b.data[0]
@@ -43,7 +43,7 @@ function vec3Sum(a, b) {
  * @param {vec3} b 
  * @returns {vec3}
  */
- function vec3Sub(a, b) {
+ export function vec3Sub(a, b) {
     let rt = new vec3()
 
     rt.data[0] = a.data[0] - b.data[0]
@@ -59,6 +59,6 @@ function vec3Sum(a, b) {
  * @param {vec3} b 
  * @returns 
  */
-function vec3Dot(a, b) {
+ export function vec3Dot(a, b) {
     return a.data[0]*b.data[0] + a.data[1]*b.data[1] + a.data[2]*b.data[2]
 }
