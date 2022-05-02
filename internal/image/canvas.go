@@ -56,6 +56,8 @@ func (cnvs Canvas_s) GetBpp() int {
 	return cnvs.bpp
 }
 
+// Set color at to pixel at cnvs.data[x, y].
+// Color takes from corrent cnvs.color* fields.
 func (cnvs Canvas_s) PutPixel(x, y int) {
 	if (x >= cnvs.width) || (y >= cnvs.width) {
 		return
@@ -66,6 +68,8 @@ func (cnvs Canvas_s) PutPixel(x, y int) {
 	cnvs.data[((x*cnvs.bpp)*cnvs.height+y*cnvs.bpp)+2] = cnvs.color_b
 }
 
+// Draw a line at canvas with Brasenham algoritm.
+// Coordinates starts at upper left corner of canvas
 func (cnvs *Canvas_s) BrasenhamLine(xs, ys int, xe, ye int) {
 	var (
 		signX, signY, err, err2 int

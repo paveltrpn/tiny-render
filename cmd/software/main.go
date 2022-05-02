@@ -7,9 +7,9 @@ import (
 )
 
 type sdlGlobalState_s struct {
-	window   *sdl.Window
-	screen   *sdl.Surface
-	renderer *sdl.Renderer
+	window *sdl.Window
+	screen *sdl.Surface
+	render *sdl.Renderer
 
 	wnd_width  int
 	wnd_height int
@@ -49,7 +49,7 @@ func initSdlGlobalState(width, height int, name string) sdlGlobalState_s {
 
 	return sdlGlobalState_s{window: window,
 		screen:     surface,
-		renderer:   render,
+		render:     render,
 		wnd_width:  width,
 		wnd_height: height,
 		name:       name,
@@ -66,9 +66,10 @@ func main() {
 	defer destroySdlGlobalState(&sdlGlobalState)
 
 	cnvs, _ := img.BuildCanvas(512, 512, 3)
-	cnvs.BrasenhamLine(10, 10, 512, 512)
+	cnvs.BrasenhamLine(10, 10, 500, 402)
+	cnvs.BrasenhamLine(400, 20, 40, 350)
 
-	texture, _ := sdlGlobalState.renderer.CreateTexture(sdl.PIXELFORMAT_RGB24,
+	texture, _ := sdlGlobalState.render.CreateTexture(sdl.PIXELFORMAT_RGB24,
 		sdl.TEXTUREACCESS_TARGET, int32(cnvs.GetWidth()), int32(cnvs.GetHeight()))
 	defer texture.Destroy()
 	rect := sdl.Rect{0, 0, int32(cnvs.GetWidth()), int32(cnvs.GetHeight())}
@@ -89,7 +90,7 @@ func main() {
 			}
 		}
 
-		sdlGlobalState.renderer.Copy(texture, nil, &rect)
-		sdlGlobalState.renderer.Present()
+		sdlGlobalState.render.Copy(texture, nil, &rect)
+		sdlGlobalState.render.Present()
 	}
 }

@@ -1,4 +1,4 @@
 *.ini
 *.png
 *.jpg
-venv/
+node_modules
