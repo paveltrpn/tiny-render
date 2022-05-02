@@ -1,4 +1,6 @@
 
+import { fEPS } from "./common"
+
 export class vec3 {
     /**
      * 
@@ -62,3 +64,38 @@ export function vec3Sum(a, b) {
  export function vec3Dot(a, b) {
     return a.data[0]*b.data[0] + a.data[1]*b.data[1] + a.data[2]*b.data[2]
 }
+
+export function vec3Cross(a, b) {
+    let rt = new vec3();
+
+	rt.data[0] = a.data[1]*b.data[2] - a.data[2]*b.data[1];
+	rt.data[1] = a.data[2]*b.data[0] - a.data[0]*b.data[2];
+	rt.data[2] = a.data[0]*b.data[1] - a.data[1]*b.data[0];
+
+	return rt;
+}
+
+export function vec3Normalize(v) {
+	let rt = new vec3();
+	let len;
+	
+	len = v.lenght();
+
+	if (len > fEPS) {
+		rt.data[0] = v.data[0] / len;
+		rt.data[1] = v.data[1] / len;
+		rt.data[2] = v.data[2] / len;
+	}
+
+	return rt;
+}
+
+export function vec3Scale(v, scale) {
+    let rt = new vec3();
+
+	rt.data[0] = v.data[0] * scale;
+	rt.data[1] = v.data[1] * scale;
+	rt.data[2] = v.data[2] * scale;
+
+	return rt;
+} 

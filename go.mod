@@ -8,4 +8,4 @@ require (
 	github.com/inkyblackness/imgui-go/v4 v4.4.0
 )
 
-require github.com/veandco/go-sdl2 v0.4.20 // indirect
+require github.com/veandco/go-sdl2 v0.4.20
