@@ -5,6 +5,28 @@
 
 bool is_run = true;
 
+typedef struct sf_appState_s {
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+
+    int wnd_width;
+    int wnd_height;
+
+    bool is_run;
+} sf_appState_s;
+
+/** 
+ * Init global application state
+ * @param state Global application state instance. Pretend to be singlton
+*/
+void sf_initAppSate(sf_appState_s *sate) {
+
+}
+
+void sf_destroyAppSate(sf_appState_s *sate) {
+
+}
+
 int main(int argc, char** argv) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf("Couldn't initialize SDL: %s\n", SDL_GetError());
