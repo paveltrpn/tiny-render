@@ -38,7 +38,7 @@ export class vec2 {
     }
 }
 ;
-function vec2Normalize(v) {
+export function vec2Normalize(v) {
     let rt = new vec2();
     let len;
     len = v.lenght();

@@ -1,36 +1,47 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import * as http from 'http';
 import * as url from 'url';
 import * as fs from 'fs';
-(async function main() {
-    const host = "localhost";
-    const port = 8000;
-    const requestListener = function (request, response) {
-        var path = url.parse(request.url).pathname;
-        let __dirname = "./app";
-        fs.readFile(__dirname + path, function (error, data) {
-            if (error) {
-                response.writeHead(404);
-                response.write('This page does not exist');
-                response.end();
-            }
-            else if (path.endsWith(".html")) {
-                response.writeHead(200, {
-                    'Content-Type': 'text/html'
-                });
-                response.write(data);
-                response.end();
-            }
-            else if (path.endsWith(".js")) {
-                response.writeHead(200, {
-                    'Content-Type': 'application/javascript'
-                });
-                response.write(data);
-                response.end();
-            }
+(function main() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const host = "localhost";
+        const port = 8000;
+        const requestListener = function (request, response) {
+            var path = url.parse(request.url).pathname;
+            let __dirname = "./app";
+            fs.readFile(__dirname + path, function (error, data) {
+                if (error) {
+                    response.writeHead(404);
+                    response.write('This page does not exist');
+                    response.end();
+                }
+                else if (path.endsWith(".html")) {
+                    response.writeHead(200, {
+                        'Content-Type': 'text/html'
+                    });
+                    response.write(data);
+                    response.end();
+                }
+                else if (path.endsWith(".js")) {
+                    response.writeHead(200, {
+                        'Content-Type': 'application/javascript'
+                    });
+                    response.write(data);
+                    response.end();
+                }
+            });
+        };
+        const server = http.createServer(requestListener);
+        server.listen(port, host, () => {
+            console.log(`Server is running on http://${host}:${port}`);
         });
-    };
-    const server = http.createServer(requestListener);
-    server.listen(port, host, () => {
-        console.log(`Server is running on http://${host}:${port}`);
     });
 })();

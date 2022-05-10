@@ -52,7 +52,7 @@ export class vec2 {
 	}
 };
 
-function vec2Normalize(v: vec2): vec2 {
+export function vec2Normalize(v: vec2): vec2 {
 	let rt = new vec2();
 	let len: number;
 	

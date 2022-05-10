@@ -1,9 +1,6 @@
+import * as alg from "./algebra/algebra.js";
 import { vsSource, fsSource } from "./shaders.js";
-import { mtrx4 } from "./mtrx4.js";
-import { qtnn } from "./qtnn.js";
-import { vec3 } from "./vec3.js";
 import { positions, normals, colors } from "./geometry.js";
-import { degToRad } from "./common.js";
 let gl;
 class cube_c {
     constructor() {
@@ -50,18 +47,18 @@ class cube_c {
         gl.enable(gl.DEPTH_TEST);
         gl.depthFunc(gl.LEQUAL);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        let projectionMatrix = new mtrx4();
-        projectionMatrix.setPerspective(degToRad(45), this.aspect, 0.1, 100.0);
-        let modelViewMatrix = new mtrx4();
-        let transMtrx = new mtrx4;
-        transMtrx.setTranslate(new vec3(0.0, 0.0, -7.0));
+        let projectionMatrix = new alg.mtrx4();
+        projectionMatrix.setPerspective(alg.degToRad(45), this.aspect, 0.1, 100.0);
+        let modelViewMatrix = new alg.mtrx4();
+        let transMtrx = new alg.mtrx4;
+        transMtrx.setTranslate(new alg.vec3(0.0, 0.0, -7.0));
         modelViewMatrix.mult(transMtrx);
-        let fooQtnn = new qtnn();
-        fooQtnn.setAxisAngl(new vec3(0.1, 0.4, 0.3), this.squareRotation);
-        let rot = new mtrx4();
+        let fooQtnn = new alg.qtnn();
+        fooQtnn.setAxisAngl(new alg.vec3(0.1, 0.4, 0.3), this.squareRotation);
+        let rot = new alg.mtrx4();
         rot.fromQtnn(fooQtnn);
         modelViewMatrix.mult(rot);
-        let normalMatrix = new mtrx4(modelViewMatrix);
+        let normalMatrix = new alg.mtrx4(modelViewMatrix);
         normalMatrix.transpose();
         {
             const numComponents = 3;
