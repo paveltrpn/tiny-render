@@ -1,23 +1,29 @@
-
-import { createServer, IncomingMessage, ServerResponse } from "http";
-
-(function main() {
+import { createServer } from 'http';
+import { parse } from 'url';
+import { readFile } from 'fs';
+(async function main() {
     const host = "localhost";
     const port = 8000;
-    
-    /**
-     * 
-     * @param {IncomingMessage} req 
-     * @param {ServerResponse} res 
-     */
-    const requestListener = function (req, res) {
-        res.setHeader("Content-Type", "text/html");
-        res.writeHead(200);
-        res.end(`<html><body><h1>This is HTML</h1></body></html>`);
+    const requestListener = function (request, response) {
+        var path = parse(request.url).pathname;
+        let __dirname = "./app";
+        readFile(__dirname + path, function (error, data) {
+            if (error) {
+                response.writeHead(404);
+                response.write('This page does not exist');
+                response.end();
+            }
+            else {
+                response.writeHead(200, {
+                    'Content-Type': 'text/html'
+                });
+                response.write(data);
+                response.end();
+            }
+        });
     };
-    
     const server = createServer(requestListener);
     server.listen(port, host, () => {
         console.log(`Server is running on http://${host}:${port}`);
     });
-})()
+})();

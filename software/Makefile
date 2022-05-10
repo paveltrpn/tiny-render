@@ -6,7 +6,7 @@ PKG_LIBJPEG_LIBDIR := ../extern/libjpeg-cmake/build
 
 CC       = cc
 CFLAGS   = -Wall --std=c17
-LFLAGS 	 = -lm -lSDL2 -ljpeg
+LFLAGS 	 = -lm -lSDL2 -llibjpeg
 
 INCDIR	 = 	$(PKG_SDL_INCDIR)\
 			$(PKG_LIBJPEG_INCDIR)

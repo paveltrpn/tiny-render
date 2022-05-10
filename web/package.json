@@ -4,5 +4,8 @@
   "description": "Humble render in webgl.",
   "main": "main.js",
   "type": "module",
-  "author": ""
+  "author": "",
+  "devDependencies": {
+    "@types/node": "^17.0.31"
+  }
 }
