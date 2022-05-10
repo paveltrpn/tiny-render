@@ -1,4 +1,4 @@
-const positions: number[] = [
+export const positions: number[] = [
     // top
      1.0,  1.0,  1.0, -1.0,  1.0,  1.0,  1.0,  1.0, -1.0,
     -1.0,  1.0,  1.0,  1.0,  1.0, -1.0, -1.0,  1.0, -1.0,
@@ -19,7 +19,7 @@ const positions: number[] = [
      1.0, -1.0,  1.0,  1.0, -1.0, -1.0,  1.0,  1.0, -1.0
 ];
 
-const normals: number[] = [
+export const normals: number[] = [
     // top
     0.0,  1.0,  0.0,  0.0,  1.0,  0.0,  0.0,  1.0,  0.0,
     0.0,  1.0,  0.0,  0.0,  1.0,  0.0,  0.0,  1.0,  0.0,
@@ -40,7 +40,7 @@ const normals: number[] = [
     1.0,  0.0,  0.0,  1.0,  0.0,  0.0,  1.0,  0.0,  0.0
 ];
 
-const colors: number[] = [
+export const colors: number[] = [
     // top (light green)
     0.5,  0.5,  0.5, 0.5,  0.5,  0.5, 0.5,  0.5,  0.5,
     0.5,  0.5,  0.5, 0.5,  0.5,  0.5, 0.5,  0.5,  0.5,

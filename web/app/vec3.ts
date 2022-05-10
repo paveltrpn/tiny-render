@@ -1,5 +1,7 @@
 
-class vec3 {
+import { idRw, fEPS } from "./common.js";
+
+export class vec3 {
 	data: Float32Array;
 	private readonly order: number = 3;
 
@@ -56,7 +58,7 @@ class vec3 {
 	}
 }
 
-function vec3Set(x: number, y: number, z:number): vec3 {
+export function vec3Set(x: number, y: number, z:number): vec3 {
 	let rt = new vec3;
 
 	rt.data[0] = x;
@@ -66,7 +68,7 @@ function vec3Set(x: number, y: number, z:number): vec3 {
 	return rt;
 }
 
-function vec3Cross(a: vec3, b: vec3): vec3 {
+export function vec3Cross(a: vec3, b: vec3): vec3 {
     let rt: vec3 = new vec3();
 
 	rt.data[0] = a.data[1]*b.data[2] - a.data[2]*b.data[1];
@@ -76,7 +78,7 @@ function vec3Cross(a: vec3, b: vec3): vec3 {
 	return rt;
 }
 
-function vec3Normalize(v: vec3): vec3 {
+export function vec3Normalize(v: vec3): vec3 {
 	let rt = new vec3();
 	let len: number;
 	
@@ -91,7 +93,7 @@ function vec3Normalize(v: vec3): vec3 {
 	return rt;
 }
 
-function vec3Scale(v: vec3, scale: number): vec3 {
+export function vec3Scale(v: vec3, scale: number): vec3 {
     let rt: vec3 = new vec3();
 
 	rt.data[0] = v.data[0] * scale;
@@ -101,7 +103,7 @@ function vec3Scale(v: vec3, scale: number): vec3 {
 	return rt;
 }
 
-function vec3Invert(v: vec3): vec3 {
+export function vec3Invert(v: vec3): vec3 {
     let rt: vec3 = new vec3;
 
 	rt.data[0] = -v.data[0];
@@ -111,11 +113,11 @@ function vec3Invert(v: vec3): vec3 {
 	return rt;
 }
 
-function vec3Dot(a : vec3, b: vec3): number {
+export function vec3Dot(a : vec3, b: vec3): number {
 	return a.data[0]*b.data[0] + a.data[1]*b.data[1] + a.data[2]*b.data[2];
 }
 
-function vec3Sum(a: vec3, b: vec3): vec3 {
+export function vec3Sum(a: vec3, b: vec3): vec3 {
     let rt: vec3 = new vec3;
 
 	rt.data[0] = a.data[0] + b.data[0];
@@ -125,7 +127,7 @@ function vec3Sum(a: vec3, b: vec3): vec3 {
 	return rt;
 }
 
-function vec3Sub(a: vec3, b: vec3): vec3 {
+export function vec3Sub(a: vec3, b: vec3): vec3 {
     let rt: vec3 = new vec3;
 
 	rt.data[0] = a.data[0] - b.data[0];

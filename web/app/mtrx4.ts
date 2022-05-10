@@ -1,5 +1,9 @@
 
-class mtrx4 {
+import { qtnn } from "./qtnn.js"
+import * as vec3 from "./vec3.js"
+import { idRw, fEPS } from "./common.js";
+
+export class mtrx4 {
     data: Float32Array;
     private readonly order: number = 4;
 
@@ -121,7 +125,7 @@ class mtrx4 {
         }
     }
 
-    setTranslate(vec: vec3) {
+    setTranslate(vec: vec3.vec3) {
         this.setIdtt();
 
         this.data[12] = vec.data[0];
@@ -283,10 +287,10 @@ class mtrx4 {
         }
     }
 
-    setAxisAngl(axis: vec3, phi: number) {
+    setAxisAngl(axis: vec3.vec3, phi: number) {
         let cosphi, sinphi, vxvy, vxvz, vyvz, vx, vy, vz: number;
-        let ax: vec3 = new vec3();
-        ax = vec3Normalize(axis);
+        let ax: vec3.vec3 = new vec3.vec3();
+        ax = vec3.vec3Normalize(axis);
     
         cosphi = Math.cos(phi);
         sinphi = Math.sin(phi);
@@ -396,7 +400,7 @@ class mtrx4 {
 }
 
 
-function mtrx4Transpose(m: mtrx4): mtrx4 {
+export function mtrx4Transpose(m: mtrx4): mtrx4 {
 	const mrange: number = 4;
 	let i, j, tmp: number;
 	let rt: mtrx4 = new mtrx4(m);
@@ -412,7 +416,7 @@ function mtrx4Transpose(m: mtrx4): mtrx4 {
 	return rt;
 }
 
-function mtrx4Mult(a: mtrx4, b: mtrx4): mtrx4 {
+export function mtrx4Mult(a: mtrx4, b: mtrx4): mtrx4 {
     const mrange = 4;
 	let i, j, k, tmp: number;
     let rt: mtrx4 = new mtrx4();

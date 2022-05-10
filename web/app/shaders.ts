@@ -1,5 +1,5 @@
 
-const vsSource: string = `
+export const vsSource: string = `
 attribute vec4 aVertexPosition;
 attribute vec3 aVertexNormal;
 attribute vec4 aVertexColor;
@@ -27,7 +27,7 @@ void main(void) {
 }
 `;
 
-const fsSource: string = `
+export const fsSource: string = `
 varying highp vec3 vLighting;
 varying lowp vec4 vColor;
 

@@ -2,10 +2,18 @@
   "compilerOptions": {
     // "strict": true,
     "target": "ES2020",
+    "module": "ES6",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
   },
   "files": ["server/server.ts",
-        "app/main.ts"]
+      "app/main.ts",
+      "app/common.ts",
+      "app/vec2.ts",
+      "app/vec3.ts",
+      "app/mtrx4.ts",
+      "app/qtnn.ts",
+      "app/shaders.ts",
+      "app/geometry.ts"]
 }

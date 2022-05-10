@@ -1,5 +1,8 @@
 
-class qtnn {
+import * as vec3 from "./vec3.js"
+import { idRw, fEPS } from "./common.js";
+
+export class qtnn {
     data: Float32Array;
     private readonly order: number = 4;
 
@@ -88,11 +91,11 @@ class qtnn {
 		this.data[2] = Math.sin(halfPhi);
 	}
 
-	setAxisAngl(axis: vec3, phi: number) {
+	setAxisAngl(axis: vec3.vec3, phi: number) {
 		let halfPhiSin: number = Math.sin(phi/2.0);
-		let ax: vec3 = new vec3();
+		let ax: vec3.vec3 = new vec3.vec3();
 
-		ax = vec3Normalize(axis);
+		ax = vec3.vec3Normalize(axis);
 		
 		this.data[3] = Math.cos(phi/2.0);
 		this.data[0] = ax.data[0] * halfPhiSin;

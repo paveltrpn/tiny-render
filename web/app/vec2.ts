@@ -1,5 +1,6 @@
+import { idRw, fEPS } from "./common.js";
 
-class vec2 {
+export class vec2 {
 
 	data: Float32Array;
 	private readonly order: number = 2;
