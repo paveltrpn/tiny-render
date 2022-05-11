@@ -1,5 +1,14 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import * as alg from "./algebra/algebra.js";
-import { vsSource, fsSource } from "./shaders.js";
+import { shader_c } from "./shaders.js";
 import { positions, normals, colors } from "./geometry.js";
 let gl;
 class cube_c {
@@ -7,38 +16,44 @@ class cube_c {
         this.squareRotation = 0.0;
     }
     setup(canvas, text_field) {
-        let html_canvas = document.querySelector(canvas);
-        gl = html_canvas.getContext('webgl2', { antialias: true, depth: true });
-        this.wnd_width = gl.drawingBufferWidth;
-        this.wnd_height = gl.drawingBufferHeight;
-        this.aspect = this.wnd_width / this.wnd_height;
-        if (!gl) {
-            alert('cube_c::setup(): Unable to initialize WebGL. Your browser or machine may not support it.');
-            return;
-        }
-        this.gl_shader = this.initShaderProgram(vsSource, fsSource);
-        this.gl_programinfo = {
-            program: this.gl_shader,
-            attribLocations: {
-                vertexPosition: gl.getAttribLocation(this.gl_shader, 'aVertexPosition'),
-                vertexNormal: gl.getAttribLocation(this.gl_shader, 'aVertexNormal'),
-                vertexColor: gl.getAttribLocation(this.gl_shader, 'aVertexColor'),
-            },
-            uniformLocations: {
-                projectionMatrix: gl.getUniformLocation(this.gl_shader, 'uProjectionMatrix'),
-                modelViewMatrix: gl.getUniformLocation(this.gl_shader, 'uModelViewMatrix'),
-                normalMatrix: gl.getUniformLocation(this.gl_shader, 'uNormalMatrix'),
-            },
-        };
-        let log_out = document.getElementById(text_field);
-        log_out.innerText = gl.getParameter(gl.VERSION) + "; " +
-            gl.getParameter(gl.SHADING_LANGUAGE_VERSION) + "; " +
-            gl.getParameter(gl.VENDOR);
-        let gl_ext = gl.getSupportedExtensions();
-        for (let i = 0; i < gl_ext.length; i++) {
-            log_out.innerText = log_out.innerText + (gl_ext[i]) + " ;";
-        }
-        this.initBuffers();
+        return __awaiter(this, void 0, void 0, function* () {
+            let html_canvas = document.querySelector(canvas);
+            gl = html_canvas.getContext('webgl2', { antialias: true, depth: true });
+            this.wnd_width = gl.drawingBufferWidth;
+            this.wnd_height = gl.drawingBufferHeight;
+            this.aspect = this.wnd_width / this.wnd_height;
+            if (!gl) {
+                alert('cube_c::setup(): Unable to initialize WebGL. Your browser or machine may not support it.');
+                return;
+            }
+            let vsSource = new shader_c();
+            yield vsSource.fetchSourceFromServer("vert.glsl");
+            let fsSource = new shader_c();
+            yield fsSource.fetchSourceFromServer("frag.glsl");
+            this.gl_shader = this.initShaderProgram(vsSource.source, fsSource.source);
+            this.gl_programinfo = {
+                program: this.gl_shader,
+                attribLocations: {
+                    vertexPosition: gl.getAttribLocation(this.gl_shader, 'aVertexPosition'),
+                    vertexNormal: gl.getAttribLocation(this.gl_shader, 'aVertexNormal'),
+                    vertexColor: gl.getAttribLocation(this.gl_shader, 'aVertexColor'),
+                },
+                uniformLocations: {
+                    projectionMatrix: gl.getUniformLocation(this.gl_shader, 'uProjectionMatrix'),
+                    modelViewMatrix: gl.getUniformLocation(this.gl_shader, 'uModelViewMatrix'),
+                    normalMatrix: gl.getUniformLocation(this.gl_shader, 'uNormalMatrix'),
+                },
+            };
+            let log_out = document.getElementById(text_field);
+            log_out.innerText = gl.getParameter(gl.VERSION) + "; " +
+                gl.getParameter(gl.SHADING_LANGUAGE_VERSION) + "; " +
+                gl.getParameter(gl.VENDOR);
+            let gl_ext = gl.getSupportedExtensions();
+            for (let i = 0; i < gl_ext.length; i++) {
+                log_out.innerText = log_out.innerText + (gl_ext[i]) + " ;";
+            }
+            this.initBuffers();
+        });
     }
     render(deltaTime) {
         gl.viewport(0, 0, this.wnd_width, this.wnd_height);
@@ -133,17 +148,18 @@ class cube_c {
         return shader;
     }
 }
-function main() {
-    let app = new cube_c();
-    let then = 0.0;
-    app.setup("#glcanvas", "log_out");
-    function render(now) {
-        now *= 0.001;
-        const deltaTime = now - then;
-        then = now;
-        app.render(deltaTime);
+(function main() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let app = new cube_c();
+        let then = 0.0;
+        yield app.setup("#glcanvas", "log_out");
+        function render(now) {
+            now *= 0.001;
+            const deltaTime = now - then;
+            then = now;
+            app.render(deltaTime);
+            requestAnimationFrame(render);
+        }
         requestAnimationFrame(render);
-    }
-    requestAnimationFrame(render);
-}
-main();
+    });
+})();

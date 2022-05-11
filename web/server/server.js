@@ -29,6 +29,7 @@ import * as fs from 'fs';
                     });
                     response.write(data);
                     response.end();
+                    console.log(`file ${path} fetched!`);
                 }
                 else if (path.endsWith(".js")) {
                     response.writeHead(200, {
@@ -36,6 +37,15 @@ import * as fs from 'fs';
                     });
                     response.write(data);
                     response.end();
+                    console.log(`file ${path} fetched!`);
+                }
+                else if (path.endsWith(".glsl")) {
+                    response.writeHead(200, {
+                        'Content-Type': 'taxt/plain'
+                    });
+                    response.write(data);
+                    response.end();
+                    console.log(`file ${path} fetched!`);
                 }
             });
         };

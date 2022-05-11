@@ -1,8 +1,7 @@
 
 import * as alg from "./algebra/algebra.js"
-import {vsSource, fsSource} from "./shaders.js"
+import {shader_c} from "./shaders.js"
 import {positions, normals, colors} from "./geometry.js"
-
 
 // Глобальный WebGL контекст
 let gl: WebGL2RenderingContext;
@@ -24,7 +23,7 @@ class cube_c {
 
     constructor() { }
 
-    setup(canvas: string, text_field: string): void {
+    async setup(canvas: string, text_field: string) {
         let html_canvas: HTMLCanvasElement = document.querySelector(canvas);
         gl = html_canvas.getContext('webgl2', { antialias: true, depth: true });
 
@@ -37,7 +36,12 @@ class cube_c {
             return;
         }
 
-        this.gl_shader = this.initShaderProgram(vsSource, fsSource);
+        let vsSource: shader_c = new shader_c()
+        await vsSource.fetchSourceFromServer("vert.glsl")
+        let fsSource: shader_c = new shader_c()
+        await fsSource.fetchSourceFromServer("frag.glsl")
+
+        this.gl_shader = this.initShaderProgram(vsSource.source, fsSource.source);
 
         this.gl_programinfo = {
             program: this.gl_shader,
@@ -219,34 +223,11 @@ class cube_c {
     }
 }
 
-/*
-function onLoad(rq: string) {
-    console.log("Nice load")
-}
-
-function loadWorld() {
-    var request = new XMLHttpRequest();
-    request.open("GET", "README.md");
-    request.onreadystatechange = function () {
-        if (request.readyState == 4) {
-            onLoad(request.responseText);
-        }
-    }
-    request.send();
-}
-
-function loadWorldFetch() {
-    fetch('../README.md', { mode: 'no-cors' })
-        .then(response => response.text())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-}
-*/
-function main() {
+(async function main() {
     let app: cube_c = new cube_c();
     let then: number = 0.0;
 
-    app.setup("#glcanvas", "log_out");
+    await app.setup("#glcanvas", "log_out");
 
     function render(now: any) {
         now *= 0.001;  // convert to seconds
@@ -258,8 +239,4 @@ function main() {
         requestAnimationFrame(render);
     }
     requestAnimationFrame(render);
-}
-
-/* ======== ENTRY POINT ======== */
-main() // <------------------------
-/* ======== =========== ======== */
+})()
