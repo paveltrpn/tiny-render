@@ -1,4 +1,4 @@
-export const positions = [
+const positions = [
     1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0,
     -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0,
     1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, -1.0,
@@ -12,7 +12,7 @@ export const positions = [
     1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0,
     1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0
 ];
-export const normals = [
+const normals = [
     0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
     0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
     0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0,
@@ -26,7 +26,7 @@ export const normals = [
     1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
     1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0
 ];
-export const colors = [
+const colors = [
     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
@@ -40,3 +40,19 @@ export const colors = [
     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
     0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
 ];
+export class gmtryInstance_c {
+    constructor() {
+    }
+    dummyInit() {
+        this.vertices = Float32Array.from(positions);
+        this.normals = Float32Array.from(normals);
+        this.colors = Float32Array.from(colors);
+        this.vertices_count = this.vertices.length;
+    }
+    fetchFromCSV(fname) {
+    }
+    applyVec3Sum(vec) {
+    }
+    applyMtrx4Mult(mtrx) {
+    }
+}

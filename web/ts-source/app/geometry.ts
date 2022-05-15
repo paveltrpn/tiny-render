@@ -1,4 +1,7 @@
-export const positions: number[] = [
+
+import * as alg from "./algebra/algebra"
+
+const positions: number[] = [
     // top
      1.0,  1.0,  1.0, -1.0,  1.0,  1.0,  1.0,  1.0, -1.0,
     -1.0,  1.0,  1.0,  1.0,  1.0, -1.0, -1.0,  1.0, -1.0,
@@ -19,7 +22,7 @@ export const positions: number[] = [
      1.0, -1.0,  1.0,  1.0, -1.0, -1.0,  1.0,  1.0, -1.0
 ];
 
-export const normals: number[] = [
+const normals: number[] = [
     // top
     0.0,  1.0,  0.0,  0.0,  1.0,  0.0,  0.0,  1.0,  0.0,
     0.0,  1.0,  0.0,  0.0,  1.0,  0.0,  0.0,  1.0,  0.0,
@@ -40,7 +43,7 @@ export const normals: number[] = [
     1.0,  0.0,  0.0,  1.0,  0.0,  0.0,  1.0,  0.0,  0.0
 ];
 
-export const colors: number[] = [
+const colors: number[] = [
     // top (light green)
     0.5,  0.5,  0.5, 0.5,  0.5,  0.5, 0.5,  0.5,  0.5,
     0.5,  0.5,  0.5, 0.5,  0.5,  0.5, 0.5,  0.5,  0.5,
@@ -60,3 +63,44 @@ export const colors: number[] = [
     0.5,  0.5,  0.5, 0.5,  0.5,  0.5, 0.5,  0.5,  0.5,
     0.5,  0.5,  0.5, 0.5,  0.5,  0.5, 0.5,  0.5,  0.5,
 ];
+
+export class gmtryInstance_c {
+    vertices: Float32Array
+    indeces: Uint32Array
+    normals: Float32Array
+    /**
+     * Per vertex color
+     */
+    colors: Float32Array
+
+    vertices_count: number
+    indeces_count: number
+
+    constructor() {
+
+    }
+
+    /**
+     * Just for testing purposes. In future this must be replaced with
+     * fetching geometry data from files with varios formats.
+     */
+    dummyInit() {
+        this.vertices = Float32Array.from(positions)
+        this.normals = Float32Array.from(normals)
+        this.colors = Float32Array.from(colors)
+
+        this.vertices_count = this.vertices.length
+    }
+
+    fetchFromCSV(fname: string) {
+
+    }
+
+    applyVec3Sum(vec: alg.vec3) {
+
+    }
+
+    applyMtrx4Mult(mtrx: alg.mtrx4) {
+
+    }
+}
