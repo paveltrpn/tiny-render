@@ -1,8 +1,9 @@
 import * as vec3 from "./vec3.js";
 import { idRw } from "./common.js";
 export class mtrx4 {
+    data;
+    order = 4;
     constructor(src) {
-        this.order = 4;
         if ((src) || (src instanceof mtrx4)) {
             this.data = new Float32Array(16);
             this.fromMtrx4(src);

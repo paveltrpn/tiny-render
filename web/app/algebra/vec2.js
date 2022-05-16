@@ -1,7 +1,8 @@
 import { fEPS } from "./common.js";
 export class vec2 {
+    data;
+    order = 2;
     constructor(x, y) {
-        this.order = 2;
         if (x instanceof vec2) {
             this.data = new Float32Array(2);
             this.fromVec2(x);

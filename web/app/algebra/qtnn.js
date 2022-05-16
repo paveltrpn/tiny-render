@@ -1,8 +1,9 @@
 import * as vec3 from "./vec3.js";
 import { fEPS } from "./common.js";
 export class qtnn {
+    data;
+    order = 4;
     constructor(x, y, z, w) {
-        this.order = 4;
         if (x instanceof qtnn) {
             this.data = new Float32Array(this.order);
             this.fromQtnn(x);
