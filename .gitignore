@@ -1,8 +1,1 @@
 *.ini
-*.o
-*.obj
-main
-main.exe
-node_modules
-extern/*
-!/extern/.gitkeep
